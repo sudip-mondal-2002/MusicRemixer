@@ -6,18 +6,26 @@ on:
     - master # Only trigger on the development branch
 
 jobs:
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest    
+  build:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
     steps:
-    # Any prerequisite steps
-    - uses: actions/checkout@master
-
-    # Deploy to local repo
-    - name: Deploy
-      uses: s0/git-publish-subdir-action@develop
-      env:
-        REPO: self
-        BRANCH: backend
-        FOLDER: backend
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: Install mustache (to update the date)
+        run:  apk add ruby && gem install mustache
+      - name: creates output
+        run:  sh ./build.sh
+      - name: Pushes to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: output/
+          destination-github-username: 'cpina'
+          destination-repository-name: 'MusicRemixer'
+          user-email: sudipmondal.2002@rediffmail.com
+          commit-message: See ORIGIN_COMMIT from $GITHUB_REF
+          target-branch: backend
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
