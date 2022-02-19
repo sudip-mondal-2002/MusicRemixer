@@ -1,7 +1,6 @@
 name: Deploy Site
 
 on:
-  workflow_dispatch:
   push:
     paths-ignore:
     - '.github/**' # Ignore changes towards the .github directory
