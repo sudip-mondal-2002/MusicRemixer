@@ -6,22 +6,19 @@ on:
     - master # Only trigger on the development branch
 
 jobs:
-  copy:
-    name: Copy my folder
-    runs-on: ubuntu-latest
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest    
     steps:
-      - uses: actions/checkout@v2
-      - name: copy
-        env:
-          SRC_FOLDER_PATH: 'Backend'
-          TARGET_BRANCH: 'backend'
-        run: |
-          files=$(find $SRC_FOLDER_PATH -type f) # get the file list
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git fetch                         # fetch branches
-          git checkout $TARGET_BRANCH       # checkout to your branch
-          git checkout ${GITHUB_REF##*/} -- $files # copy files from the source branch
-          git add -A
-          git diff-index --quiet HEAD ||  git commit -am "deploy files"  # commit to the repository (ignore if no modification)
-          git push origin $TARGET_BRANCH # push to remote branch
+
+    # Any prerequisite steps
+    - uses: actions/checkout@master
+
+    # Deploy to local repo
+    - name: Deploy
+      uses: s0/git-publish-subdir-action@develop
+      env:
+        REPO: self
+        BRANCH: backend
+        FOLDER: Backend
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
