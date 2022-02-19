@@ -19,7 +19,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: backend/
+          source-directory: backend
           destination-github-username: 'sudip-mondal-2002'
           destination-repository-name: 'MusicRemixer'
           user-email: sudipmondal.2002@rediffmail.com
