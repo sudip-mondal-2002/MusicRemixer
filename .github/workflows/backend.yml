@@ -6,7 +6,7 @@ on:
     paths-ignore:
     - '.github/**' # Ignore changes towards the .github directory
     branches:
-    - development # Only trigger on the development branch
+    - master # Only trigger on the development branch
 
 jobs:
   build:
@@ -14,9 +14,7 @@ jobs:
     steps:
     - name: Perform Checkout
       uses: actions/checkout@v2
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./backend
-        publish_branch: master
+        publish_branch: backend
