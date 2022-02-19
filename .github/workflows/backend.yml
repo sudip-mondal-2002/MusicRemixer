@@ -20,7 +20,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: backend/
-          destination-github-username: 'cpina'
+          destination-github-username: 'sudip-mondal-2002'
           destination-repository-name: 'MusicRemixer'
           user-email: sudipmondal.2002@rediffmail.com
           commit-message: See ORIGIN_COMMIT from $GITHUB_REF
