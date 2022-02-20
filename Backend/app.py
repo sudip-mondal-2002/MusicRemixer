@@ -7,9 +7,10 @@ import io
 from six.moves.urllib.request import urlopen
 import pathlib
 import pydub
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 
 def beatExtractor(track, sr):
     tempo, beat_times = librosa.beat.beat_track(
