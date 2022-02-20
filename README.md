@@ -1,4 +1,16 @@
 # MusicRemixer
+## Using the API
+* Endpoint+path : https://musicremixer.herokuapp.com/remix
+* Method: POST
+* Body: type/json, urls = array of string(url to a wav file)
+```json
+{
+    "urls":[
+        "https://file-examples-com.github.io/uploads/2017/11/file_example_WAV_1MG.wav"
+    ]
+}
+```
+* Return : Wav file(Remix music)
 ## Proposed Architecture of Model and Workflow
 ### Segregate the beats from the track
 Using Dynamic programming, can separate the beats from each other. Beats are detected in three stages, following the method of [Ellis, Daniel PW. “Beat tracking by dynamic programming”](http://labrosa.ee.columbia.edu/projects/beattrack/). The stages are as following, 
