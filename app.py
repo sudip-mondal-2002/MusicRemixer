@@ -30,7 +30,7 @@ def beatExtractor(track, sr):
 def featureExtractor(beats, sr, n_features):
     features =[]
     for beat in beats:
-        beat_features_raw = librosa.feature.mfcc(y=beat, sr=sr, n_mfcc=n_features)
+        beat_features_raw = librosa.feature.chroma_stft(y=beat, sr=sr,n_chroma=n_features)
         beat_features = []
         for raw in beat_features_raw:
             beat_features.append(sum(raw)/len(raw))
@@ -56,18 +56,21 @@ def musicGenerator(beats, beat_notes):
         music = music + list(beats[note])
     return np.array(music)
 
-def main(main_track, sr, N_FEATURES=5, N_GROUPS=5, N_BEATS=20, TEMPERATURE=1):
-    x,_ = librosa.effects.trim(main_track)
-    beats = beatExtractor(x, sr)
+def main(main_track, sr, N_FEATURES=50, N_GROUPS=5, N_BEATS=20, TEMPERATURE=1):
+    beats = beatExtractor(main_track, sr)
     features = featureExtractor(beats, sr, N_FEATURES)
     groups,group_to_index = groupExtractor(features, beats, N_GROUPS)
     groups = list(groups)
     curr_group = random.randrange(N_GROUPS)
+    curr_beat = -1
     music = []
     for i in range(N_BEATS):
-        choices = groups + [curr_group]*(len(groups)//TEMPERATURE)
-        curr_group = random.choice(choices)
-        curr_beat = random.choice(group_to_index[curr_group])
+        nextTone = random.randint(0,TEMPERATURE)
+        if(nextTone==0 and curr_beat<len(beats)-1):
+            curr_beat+=1
+        else:
+            curr_beat = random.choice(group_to_index[curr_group])
+            curr_group = groups[curr_beat]
         music.append(curr_beat)
     music_arr = musicGenerator(beats,music)
     return music_arr
