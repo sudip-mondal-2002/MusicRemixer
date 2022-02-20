@@ -73,6 +73,7 @@ def groupExtractor(features, beats, n_groups):
 
 ### Generate new music from the beats
 To generate the music, there is not a hard bound theory I have used till now, I just simply took a logical algorithm to build the music. At every beat, we will do a random check if the next beat will be the correct next beat as per the original music or it will be a random beat from the cluster of the current beat. So, the current track will be 1-2-3-4-2 as shown in the figure.
+
 ![Model Arch](./Backend/tmp/model.png)
 
 ```py
