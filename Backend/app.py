@@ -7,6 +7,7 @@ import io
 from six.moves.urllib.request import urlopen
 import pathlib
 import pydub
+import base64
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -35,7 +36,7 @@ def featureExtractor(beats, sr, n_features):
         for raw in beat_features_raw:
             beat_features.append(sum(raw)/len(raw))
         features.append(beat_features)
-    features = np.array(features)
+    features = np.array(features, dtype=np.float32)
     return features
 
 def groupExtractor(features, beats, n_groups):
@@ -54,9 +55,9 @@ def musicGenerator(beats, beat_notes):
     music = []
     for note in beat_notes:
         music = music + list(beats[note])
-    return np.array(music)
+    return np.array(music, dtype=np.float32)
 
-def main(main_track, sr, N_FEATURES=50, N_GROUPS=5, N_BEATS=20, TEMPERATURE=1):
+def main(main_track, sr, N_FEATURES=50, N_GROUPS=5, N_BEATS=20, TEMPERATURE=3):
     beats = beatExtractor(main_track, sr)
     features = featureExtractor(beats, sr, N_FEATURES)
     groups,group_to_index = groupExtractor(features, beats, N_GROUPS)
@@ -88,10 +89,8 @@ def write(f, sr, x, normalized=False):
 def fun():
     return {"path": "/remix", "method":"POST", "body":{"urls":"string[]"}}
 
-@app.route('/remix', methods=['GET', 'POST'])
+@app.route('/remix', methods=['POST'])
 def server():
-    if request.method == 'GET':
-        return {"server":"true"}
     urls = request.get_json()["urls"]
     music = []
     rate = 48000
@@ -101,12 +100,10 @@ def server():
         x, _= librosa.load('./tmp/temp.wav', sr = rate)
 
         music += list(x)
-    print(len(music),len(x))
     music = np.array(music, dtype = np.float32)
     remix = main(music, rate)
     write("./tmp/remix.wav",rate, remix,True)
     return send_file("./tmp/remix.wav")
 
 if __name__ == '__main__':
-
-    app.run()
+    app.run(debug=True)

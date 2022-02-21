@@ -20,9 +20,12 @@ numba==0.55.1
 numpy==1.21.5
 packaging==21.3
 pooch==1.6.0
+pycodestyle==2.8.0
 pycparser==2.21
 pydub==0.25.1
 pyparsing==3.0.7
+python-dateutil==2.8.2
+pytz==2021.3
 requests==2.27.1
 resampy==0.2.2
 scikit-learn==1.0.2
@@ -31,5 +34,6 @@ six==1.16.0
 sklearn==0.0
 SoundFile==0.10.3.post1
 threadpoolctl==3.1.0
+toml==0.10.2
 urllib3==1.26.8
 Werkzeug==2.0.3
