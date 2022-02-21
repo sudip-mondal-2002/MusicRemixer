@@ -1,6 +1,5 @@
 import React from 'react';
 import {Image} from 'react-bootstrap'
-import heroImage from '../assets/images/hero.jpg'
 const styles = {
     "heroImage":{
         "marginLeft" : "10%",
@@ -12,7 +11,7 @@ const styles = {
 const Herosection = () => {
     return (
         <div id="home">
-            <Image src={heroImage} width="80%" style={styles.heroImage}/>
+            <Image src="https://github.com/sudip-mondal-2002/MusicRemixer/blob/master/web/src/assets/images/hero.jpg?raw=true" width="80%" style={styles.heroImage}/>
         </div>
     );
 }
