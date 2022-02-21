@@ -1,4 +1,5 @@
 # MusicRemixer
+Website Hosted here : [![Netlify Status](https://api.netlify.com/api/v1/badges/5af7cc51-8d88-48e0-a652-97bddfdd1dc2/deploy-status)](https://app.netlify.com/sites/musicremixer/deploys)
 ## Using the API
 * Endpoint+path : https://musicremixer.herokuapp.com/remix
 * Method: POST
