@@ -86,7 +86,7 @@ def write(f, sr, x, normalized=False):
     
 @app.route('/', methods=['GET'])
 def fun():
-    return "Hello"
+    return {"path": "/remix", "method":"POST", "body":{"urls":"string[]"}}
 
 @app.route('/remix', methods=['GET', 'POST'])
 def server():
