@@ -1,4 +1,4 @@
-name: Deploy Backend
+name: Copy Frontend Web
 
 on:
   push:
