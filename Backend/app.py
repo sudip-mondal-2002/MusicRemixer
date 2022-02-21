@@ -101,8 +101,9 @@ def server():
         x, _= librosa.load('./tmp/temp.wav', sr = rate)
 
         music += list(x)
+    print(len(music),len(x))
     music = np.array(music, dtype = np.float32)
-    remix = main(x, rate)
+    remix = main(music, rate)
     write("./tmp/remix.wav",rate, remix,True)
     return send_file("./tmp/remix.wav")
 
