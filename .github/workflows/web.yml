@@ -17,19 +17,17 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - name: change dir
-      run: cd web
-    - name: Install NPM packages
-      run: npm ci
-    
-    - name: Build project
-      run: npm run build
+    - name: Build
+      run: |
+        cd web
+        npm ci
+        npm run build
 
     - name: Upload production-ready build files
       uses: actions/upload-artifact@v2
       with:
         name: production-files
-        path: ./build
+        path: ./web/build
   
   deploy:
     name: Deploy
@@ -42,7 +40,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: production-files
-        path: ./build
+        path: ./web/build
 
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
