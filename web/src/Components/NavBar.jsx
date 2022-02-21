@@ -9,7 +9,6 @@ const myNavbar = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="#docs">API Documentation</Nav.Link>
-                        <Nav.Link href="#test">Live Demo</Nav.Link>
                         <Nav.Link href="#theory">How it works</Nav.Link>
                     </Nav>
                     <Nav>

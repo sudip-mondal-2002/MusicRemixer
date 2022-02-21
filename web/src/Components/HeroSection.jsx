@@ -5,7 +5,8 @@ const styles = {
     "heroImage":{
         "marginLeft" : "10%",
         "width": "80%",
-        "marginRight":"10%"
+        "marginRight":"10%",
+        "marginTop": "20px"
     }
 }
 const Herosection = () => {
