@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "MusicRemixer",
+    "slug": "MusicRemixer",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "MusicRemixer"
+}
