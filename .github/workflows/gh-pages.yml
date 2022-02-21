@@ -11,5 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: branch web
+        run: git checkout web
       - name: Deploy react app to github pages
         uses: tanwanimohit/deploy-react-to-ghpages@v1.0.1
