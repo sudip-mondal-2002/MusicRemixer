@@ -105,5 +105,18 @@ def server():
     write("./tmp/remix.wav",rate, remix,True)
     return send_file("./tmp/remix.wav")
 
+@app.route("/music", methods=['GET'])
+def music():
+    links = {"musics":{
+        "Animals":"https://drive.google.com/uc?id=1PztZQ1NFVVnE2ec2U3dB4Hoc7PqqaAkV",
+        "Ben 10 Theme":"https://drive.google.com/uc?id=1zyV05-mZbxsbRT5O23nPjHV2LSBrri-5",
+        "DesPacito":"https://drive.google.com/uc?id=1LJnlDYP2DAYZ_J2Qm9j3eZQ8nqW0p4cE",
+        "GTA San Andreas":"https://drive.google.com/uc?id=1fRqKSiYgCeArNZk5pC7zVjpp_rRtsZLW",
+        "Lily":"https://drive.google.com/uc?id=1LxYH9sf5FD6SAs8plwF4dYKZ5sH8zeuZ",
+        "ShapeOfYou":"https://drive.google.com/uc?id=19Gi7qVPcNz9Ax0I-f3dQ4sxdSDKZjAiS",
+        "Titanic":"https://drive.google.com/uc?id=1UPHwsM5g1oFZpr5d3-uXwI-iNo9gke2K",
+        "Zara zara":"https://drive.google.com/uc?id=1AcoMhTd_hT_gkIVphEzpgP5sY2osxKWp",
+        }}
+    return links
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
